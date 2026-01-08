@@ -1,0 +1,57 @@
+🧩 Problem 1: Sum of All Elements
+Method Header
+public static int sum2D(int[][] matrix)
+Task
+Write a method that returns the sum of all even elements in a 2D integer array.
+Example
+If matrix contains:
+1  2  3
+4  5  6
+The method should return 12.
+
+🧩 Problem 2: Row Average
+Method Header
+public static double rowAverage(int[][] matrix, int row)
+Task
+Return the average of the elements in a given row.
+Assume:
+row is a valid index
+The row contains at least one element
+Example
+For row 1 in:
+2  4
+6  8
+Return 7.0.
+
+🧩 Problem 3: Count Occurrences
+Method Header
+public static int countValue(int[][] matrix, int target)
+Task
+Count how many times target appears in the 2D array.
+Example
+Target = 3
+3  1  3
+2  3  4
+Return 3.
+
+🧩 Problem 4: Column Maximum
+Method Header
+public static int columnMax(int[][] matrix, int col)
+Task
+Return the largest value in a given column.
+Assume:
+col is a valid index
+The matrix has at least one row
+Example
+Column 0 in:
+5  2  9
+7  1  4
+
+Return 7.
+
+🧩 Problem 5: Difference of All Elements of two 2d arrays of integers
+Method Header
+public static int[][] diff2D(int[][] matrix1, int[][] matrix2)
+Task
+Write a method that returns the difference of all elements and returns the answer in a 2D integer array.
+
