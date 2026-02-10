@@ -12,11 +12,16 @@ public class AccountClient {
             new Account("Angela Brown", 10017, 9876, 156200.80),
             new Account("Christopher Lee", 10018, 2048, 42100.30),
             new Account("Nicole Adams", 10019, 7654, 8750.60),
+            new Account("Scrooge McDuck", 10111, 9999, 9999999.99),
             new Account("Robert Taylor", 10110, 3456, 125600.00),
-            new Account("Scrooge McDuck", 10111, 9999, 9999999.99)
+            
         ));
         
         //Organize by balance
         
+        Account.sortID(accounts);
+        System.out.println(accounts);
+        System.out.println(Account.searchID(accounts, 10014));
+                
     }
 }
