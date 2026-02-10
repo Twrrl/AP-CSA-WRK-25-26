@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class Account {
     private String name;
     private int id;
@@ -16,11 +18,13 @@ public class Account {
 
     public void deposit(double amnt) {
         balance += amnt;
+        inDebt = (balance < 0);
     }
 
     public void withdraw(double amnt) {
         if (!inDebt) {
             balance -= amnt;
+            inDebt = (balance < 0);
         } else {
             System.out.println("Insufficient funds");
         }
@@ -37,8 +41,8 @@ public class Account {
     public static void sortBalance(ArrayList<Account> accounts) {
         for (int i = 0; i < accounts.size() - 1; i++) {
             Account temp;
-            for (int j = i + 1; j < accounts.size(0); j++) {
-                if (accounts.get(j).getBalance() > accounts.get(i).getBalance) {
+            for (int j = i + 1; j < accounts.size(); j++) {
+                if (accounts.get(j).getBalance() > accounts.get(i).getBalance()) {
                     temp = accounts.get(i);
                     accounts.set(i, accounts.get(j));
                     accounts.set(j, temp);
@@ -50,8 +54,8 @@ public class Account {
     public static void sortID(ArrayList<Account> accounts) {
         for (int i = 0; i < accounts.size() - 1; i++) {
             Account temp;
-            for (int j = i + 1; j < accounts.size(0); j++) {
-                if (accounts.get(j).getID() > accounts.get(i).getID()) {
+            for (int j = i + 1; j < accounts.size(); j++) {
+                if (accounts.get(j).getId() < accounts.get(i).getId()) {
                     temp = accounts.get(i);
                     accounts.set(i, accounts.get(j));
                     accounts.set(j, temp);
@@ -62,25 +66,23 @@ public class Account {
 
     public static Account searchID(ArrayList<Account> accounts, int target) {
         Account.sortID(accounts);
-        int upper = accounts.size() - 1;
         int lower = 0;
-        int center;
+        int upper = accounts.size() - 1;
 
-        while (lower < upper) {
-            center = (upper - lower) / 2;
-            if (accounts.get(center).getID() == target) {
+        while (lower <= upper) {
+            int center = lower + (upper - lower) / 2;
+            int id = accounts.get(center).getId();
+            if (id == target) {
                 return accounts.get(center);
-            }
-            else if (accounts.get(center).getID() > target) {
-                lower = center
-                center = upper - lower;
-            }
-            else if (accounts.get(center).getID() < target) {
-                upper = center
-                center = upper - lower;
+            } else if (id < target) {
+                lower = center + 1;
+            } else {
+                upper = center - 1;
             }
         }
+        return null;
     }
+
 
     public String toString() {
         return String.format("ID: %d | Name: %-25s | Balance: $%,.2f | In Debt: %s",
