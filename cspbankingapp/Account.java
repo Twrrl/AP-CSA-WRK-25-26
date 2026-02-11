@@ -17,11 +17,19 @@ public class Account {
     }
 
     public void deposit(double amnt) {
+        if (amnt < 0) {
+            throw new IllegalArgumentException("Cannot deposit negative amount");
+        }
+
         balance += amnt;
         inDebt = (balance < 0);
     }
 
     public void withdraw(double amnt) {
+        if (amnt < 0) {
+            throw new IllegalArgumentException("Cannot withdraw2 negative amount");
+        }
+
         if (!inDebt) {
             balance -= amnt;
             inDebt = (balance < 0);
@@ -34,7 +42,7 @@ public class Account {
         return balance;
     }
 
-    public int getId(){
+    public int getId() {
         return id;
     }
 
@@ -64,7 +72,23 @@ public class Account {
         }
     }
 
-    public static Account searchID(ArrayList<Account> accounts, int target) {
+    public static void sortBy(ArrayList<Account> accounts, String choice) {
+        if (choice.equals("id")||choice.equals("ID")||choice.equals("Id")||choice.equals("iD")){
+            for (int i = 0; i < accounts.size() - 1; i++) {
+                Account temp;
+                for (int j = i + 1; j < accounts.size(); j++) {
+                    if (accounts.get(j).getId() < accounts.get(i).getId()) {
+                        temp = accounts.get(i);
+                        accounts.set(i, accounts.get(j));
+                        accounts.set(j, temp);
+                    }
+                }
+            }
+        }
+
+    }
+
+    public static Account searchID(ArrayList<Account> accounts, int target) {// searching for target in accounts
         Account.sortID(accounts);
         int lower = 0;
         int upper = accounts.size() - 1;
@@ -83,10 +107,8 @@ public class Account {
         return null;
     }
 
-
     public String toString() {
-        return String.format("ID: %d | Name: %-25s | Balance: $%,.2f | In Debt: %s",
-                id, name, balance, inDebt);
+        return "Name: " + name + "\n" + "ID: " + id + "\n" + "Pin: " + accountPin + "\n" + "Balance: " + balance;
     }
 
 }
